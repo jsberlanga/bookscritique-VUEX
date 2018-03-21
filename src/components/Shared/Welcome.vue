@@ -1,11 +1,6 @@
 <template>
   <div class="welcome">
     <h1>{{msg}}</h1>
-    <ul>
-      <li>Item 1</li>
-      <li>Item 2</li>
-      <li>Item 3</li>
-    </ul>
   </div>
 </template>
 
@@ -19,8 +14,9 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-h3 {
-  margin: 40px 0 0;
+h1 {
+  margin: 0;
+  padding: 0;
 }
 ul {
   list-style-type: none;

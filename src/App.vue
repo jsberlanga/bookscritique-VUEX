@@ -42,7 +42,7 @@ body {
 }
 
 #showcase > * {
-  padding: 100px;
+  padding: 50px;
 }
 
 h1 {
