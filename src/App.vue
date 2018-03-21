@@ -1,65 +1,65 @@
 <template>
   <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
+    <appHeader></appHeader>
+    
+    <div id="showcase">
+      <transition name="zoom" mode="out-in">
+        <router-view/>
+      </transition>
     </div>
 
-    <transition name="zoom" mode="out-in">
-      <router-view/>
-    </transition>
   </div>
 </template>
+
+<script>
+
+import Header from './components/Shared/Header'
+
+export default {
+  components: {
+    appHeader: Header
+  }
+}
+</script>
+
 
 <style>
 * {
   box-sizing: border-box;
   padding: 0;
+  margin: 0;
+  letter-spacing: 1.5px;
+}
+body {
+  background: ghostwhite
 }
 
 #app {
   text-align: center;
   color: #2c3e50;
   font-family: 'Playfair Display', serif;
+  
+}
+
+#showcase > * {
+  padding: 100px;
 }
 
 h1 {
   font-family: 'Merriweather', serif;
 }
 
-#nav {
-  padding: 30px;
-}
-
-#nav a {
-  font-weight: bold;
-  color: #2c3e50;
-}
-
-#nav a.router-link-exact-active {
-  color: #42b983;
-}
-
-.home, .about {
-  width: 80%;
-  min-height: 50vh;
-  margin-left: 10vw;
-
-  border-radius: 10pt;
-  padding: 20px;
-}
-
 .zoom-enter-active {
-  animation: zoomIn 1s
+  animation: zoomIn 0.5s
 }
 .zoom-leave-active {
-  animation: zoomOut 1s
+  animation: zoomOut 0.5s
 }
 
 @keyframes zoomIn {
   from {
     opacity: 0;
-    transform: scale(0.7);
+    transform: scale(0.9);
   }
   to {
     opacity: 1;
@@ -74,7 +74,7 @@ h1 {
   }
   to {
     opacity: 0;
-    transform: scale(0.7);    
+    transform: scale(0.9);    
   }
 }
 
