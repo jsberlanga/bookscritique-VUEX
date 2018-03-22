@@ -1,7 +1,8 @@
 <template>
   <div id="login">
   <h1> Sign In </h1>
-    <input   
+  <form  @submit.prevent="userLogin" >
+    <input
         type="text" 
         name="email" 
         required 
@@ -19,7 +20,7 @@
       id="btn"
       @click="userLogin"
       >Login</button>
-
+    </form>
   <p>You don't have an account yet? In that case please go back to <router-link to="/register">Register</router-link></p>
 
   </div>

@@ -2,11 +2,13 @@ import Vue from "vue";
 import Router from "vue-router";
 import Home from "./views/Home.vue";
 import About from "./views/About.vue";
-import Reviews from "./views/Reviews.vue";
-import NotFound from './views/NotFound.vue'
+import NotFound from './views/NotFound.vue';
 
 import Login from "./components/User/Login.vue";
 import Register from "./components/User/Register.vue";
+
+import Reviews from "./components/Reviews/Reviews.vue";
+import Profile from "./components/User/Profile.vue";
 
 import firebase from "firebase";
 
@@ -43,6 +45,14 @@ const router = new Router({
       path: "/reviews",
       name: "reviews",
       component: Reviews,
+      meta: {
+        requiresAuth: true
+      }
+    },
+    {
+      path: "/profile",
+      name: "profile",
+      component: Profile,
       meta: {
         requiresAuth: true
       }

@@ -1,13 +1,15 @@
-import Vue from 'vue'
-import Vuex from 'vuex'
-import firebase from 'firebase'
+import Vue from "vue";
+import Vuex from "vuex";
 import router from '@/router'
 
-Vue.use(Vuex)
+import firebase from 'firebase'
+
+Vue.use(Vuex);
 
 export const store = new Vuex.Store({
   state: {
     appTitle: 'La Booktique',
+    reviewsPageTitle: 'La Bootique Reviews',
     user: null,
     error: null
   },
@@ -37,6 +39,7 @@ export const store = new Vuex.Store({
     userLogin ({commit}, payload) {
       firebase.auth().signInWithEmailAndPassword(payload.email, payload.password)
       .then(firebaseUser => {
+        console.log(firebaseUser)
         commit('setUser', {email: firebaseUser.email})
         commit('setError', null)
         router.push('/reviews')

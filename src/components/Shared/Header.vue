@@ -9,12 +9,12 @@
         </h1>
 
         <li v-for="(item,index) in menuItems" :key="index">
-          <router-link :to="item.path">{{item.title}}</router-link>
+          <router-link :to="item.path"><i :class="item.icon"></i> {{item.title}}</router-link>
         </li>
 
           <li
             @click="userSignOut"
-            v-if="isAuthenticated"><a>Logout</a></li>
+            v-if="isAuthenticated"><a><i class="fas fa-sign-out-alt"></i> Logout</a></li>
 
       </ul>
 
@@ -35,13 +35,14 @@ export default {
     menuItems () {
       if (this.isAuthenticated) {
         return [
-          {title: 'Reviews', path: '/reviews'},
+          {title: 'Reviews', path: '/reviews', icon: 'fas fa-book'},
+          {title: 'Profile', path: '/profile', icon: 'fas fa-user-circle'},
         ]
       } else {
         return [
           // {title: 'About', path: '/about'},          
-          {title: 'Register', path: '/register'},
-          {title: 'Login', path: '/login'},
+          {title: 'Register', path: '/register', icon: 'fas fa-user-plus'},
+          {title: 'Login', path: '/login', icon: 'fas fa-sign-in-alt'},
         ]
       }
     }

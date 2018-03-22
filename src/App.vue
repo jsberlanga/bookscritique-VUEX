@@ -86,4 +86,30 @@ h1 {
   }
 }
 
+input {
+  min-height: 40px;
+  padding: 10px;
+  font-family: 'Playfair Display', serif;
+  font-size: 16px;
+  outline-color: darkslategray;
+  background: ghostwhite;
+  border: none;
+  box-shadow: 1px 0px 1px silver;
+}
+#btn {
+  padding: 10px;
+  background: darkseagreen;
+  box-shadow: 1px 0px 1px seagreen;
+  border: none;
+  font-family: "Playfair Display", serif;
+  font-size: 18px;
+  color: white;
+  font-weight: bold;
+  letter-spacing: 1.5px;
+  cursor: pointer;
+}
+
+#btn:active {
+  background: seagreen;
+}
 </style>
