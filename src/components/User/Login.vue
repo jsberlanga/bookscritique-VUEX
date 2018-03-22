@@ -17,7 +17,7 @@
     
     <button
       id="btn"
-      @click="login"
+      @click="userLogin"
       >Login</button>
 
   <p>You don't have an account yet? In that case please go back to <router-link to="/register">Register</router-link></p>
@@ -37,19 +37,11 @@ export default {
     };
   },
   methods: {
-    login() {
-      firebase
-        .auth()
-        .signInWithEmailAndPassword(this.email, this.password)
-        .then(
-          user => {
-            console.log(user)
-            this.$router.replace("/reviews");
-          },
-          err => {
-            console.log("Oops. " + err.message);
-          }
-        );
+    userLogin() {
+      return this.$store.dispatch('userLogin', {
+        email: this.email,
+        password: this.password
+      })
       }
     }
   };

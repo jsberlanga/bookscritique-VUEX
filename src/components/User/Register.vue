@@ -21,7 +21,8 @@
       type="password" 
       name="confirmPassword"
       required       
-      placeholder="Confirm Password" 
+      placeholder="Confirm Password"
+      :rules="[comparePasswords]"
       v-model="confirmPassword"/>
       
 
@@ -46,24 +47,21 @@ export default {
       confirmPassword: ''
     }
   },
-  // computed: {
-  //   comparePasswords () {
-  //     this.password !== this.confirmPassword ? 'Passwords do not match' : ''
-  //   }
-  // },
+  computed: {
+    comparePasswords () {
+      return this.password === this.confirmPassword
+    }
+  },
   methods: {
     register () {
-      if (this.password !== this.confirmPassword) {
+      if (this.comparePasswords !== true) {
         alert('Passwords do not match')
         return
       }
-      firebase.auth().createUserWithEmailAndPassword(this.email, this.password)
-        .then(function (user) {
-          console.log(user)
-        })
-        .catch(err => console.log(err))
-         
-      this.$router.replace('login')
+      this.$store.dispatch('userRegistration', {
+        email: this.email,
+        password: this.password
+      })
     }
   }
 }

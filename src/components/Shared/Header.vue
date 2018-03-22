@@ -5,28 +5,16 @@
 
       <ul>
         <h1 class="main">
-          <router-link to="/">BookCritique</router-link>
+          <router-link to="/">{{appTitle}}</router-link>
         </h1>
-        
-        <div class="elements-left">
-          <li>
-            <router-link to="/about">About</router-link>
-          </li>
 
-          <li>
-            <router-link to="/reviews">Reviews</router-link>
-          </li>
-        </div>
-        
-        <div class="elements-right">
-          <li>
-            <router-link to="/register">Register</router-link>
-          </li>
+        <li v-for="(item,index) in menuItems" :key="index">
+          <router-link :to="item.path">{{item.title}}</router-link>
+        </li>
 
-          <li>
-            <router-link to="/login">Login</router-link>
-          </li>
-        </div>
+          <li
+            @click="userSignOut"
+            v-if="isAuthenticated"><a>Logout</a></li>
 
       </ul>
 
@@ -37,10 +25,32 @@
 
 <script>
 export default {
-  data() {
-    return {};
+  computed: {
+    appTitle () {
+      return this.$store.state.appTitle
+    },
+    isAuthenticated () {
+      return this.$store.getters.isAuthenticated
+    },
+    menuItems () {
+      if (this.isAuthenticated) {
+        return [
+          {title: 'Reviews', path: '/reviews'},
+        ]
+      } else {
+        return [
+          // {title: 'About', path: '/about'},          
+          {title: 'Register', path: '/register'},
+          {title: 'Login', path: '/login'},
+        ]
+      }
+    }
   },
-  methods: {}
+  methods: {
+    userSignOut () {
+      this.$store.dispatch('userSignOut')
+    }
+  }
 };
 </script>
 
@@ -59,8 +69,14 @@ export default {
 
 .navbar ul {
   display: flex;
-  justify-content: space-between;
-  /* flex-wrap: wrap */
+  justify-content: space-around;
+}
+
+@media (max-width: 1060px) {
+.navbar ul {
+  flex-direction: column;
+  align-items: center;
+  }
 }
 
 .navbar li {
@@ -74,6 +90,7 @@ export default {
   text-decoration: none;
   color: darkslateblue;
   font-weight: bold;
+  cursor: pointer;
 }
 
 .navbar a.router-link-exact-active {
@@ -81,13 +98,13 @@ export default {
 }
 
 .navbar .elements-left,
-.elements-right {
+.navbar .elements-right {
   display: flex;
   justify-content: space-between;
 }
 
 .navbar .elements-left li,
 .navbar .elements-right li {
-  padding: 0px 50px;
+  padding: 0px 70px;
 }
 </style>

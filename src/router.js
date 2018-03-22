@@ -3,17 +3,21 @@ import Router from "vue-router";
 import Home from "./views/Home.vue";
 import About from "./views/About.vue";
 import Reviews from "./views/Reviews.vue";
+import NotFound from './views/NotFound.vue'
+
 import Login from "./components/User/Login.vue";
 import Register from "./components/User/Register.vue";
+
 import firebase from "firebase";
 
 Vue.use(Router);
 
-let router = new Router({
+const router = new Router({
   routes: [
     {
       path: "*",
-      redirect: "/login"
+      name: 'notfound',
+      component: NotFound
     },
     {
       path: "/",
@@ -48,12 +52,13 @@ let router = new Router({
 });
 
 router.beforeEach((to, from, next) => {
-  let currentUser = firebase.auth().currentUser;
-  let requiresAuth = to.matched.some(record => record.meta.requiresAuth);
+  const requiresAuth = to.matched.some(record => record.meta.requiresAuth)
+  const isAuthenticated = firebase.auth().currentUser
+  if (requiresAuth && !isAuthenticated) {
+    next('/login')
+  } else {
+    next()
+  }
+})
 
-  if (requiresAuth && !currentUser) next("login");
-  // else if (!requiresAuth && currentUser) next("reviews");
-  else next();
-});
-
-export default router;
+export default router

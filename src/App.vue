@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <appHeader></appHeader>
-    
+
     <div id="showcase">
       <transition name="zoom" mode="out-in">
         <router-view/>
@@ -18,6 +18,8 @@ import Header from './components/Shared/Header'
 export default {
   components: {
     appHeader: Header
+  },
+  computed: {
   }
 }
 </script>
@@ -38,7 +40,13 @@ body {
   text-align: center;
   color: #2c3e50;
   font-family: 'Playfair Display', serif;
-  
+  display: flex;
+  flex-direction: column
+}
+
+#showcase {
+  max-width: 80vw;
+  margin: 0 auto;
 }
 
 #showcase > * {
