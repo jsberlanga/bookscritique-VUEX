@@ -58,16 +58,16 @@ h1 {
 }
 
 .zoom-enter-active {
-  animation: zoomIn 0.5s
+  animation: zoomIn 0.4s
 }
 .zoom-leave-active {
-  animation: zoomOut 0.5s
+  animation: zoomOut 0.4s
 }
 
 @keyframes zoomIn {
   from {
     opacity: 0;
-    transform: scale(0.9);
+    transform: scale(0.97);
   }
   to {
     opacity: 1;
@@ -82,11 +82,11 @@ h1 {
   }
   to {
     opacity: 0;
-    transform: scale(0.9);    
+    transform: scale(0.97);    
   }
 }
 
-input {
+input, textarea {
   min-height: 40px;
   padding: 10px;
   font-family: 'Playfair Display', serif;

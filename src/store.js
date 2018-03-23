@@ -11,10 +11,31 @@ export const store = new Vuex.Store({
     appTitle: 'La Booktique',
     reviewsPageTitle: 'La Bootique Reviews',
     user: null,
-    error: null
+    error: null,
+    loadedReviews: [
+      {
+      title: 'Bullet Park',
+      author: 'John Cheever',
+      coverUrl: 'https://images-na.ssl-images-amazon.com/images/I/51zGIkRQiHL._SX324_BO1,204,203,200_.jpg',
+      review: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Nobis autem quis doloremque nesciunt dolores ad incidunt ipsam consequuntur vero numquam perferendis libero assumenda ut mollitia repellendus sit eos, repellat atque.Lorem ipsum dolor sit amet consectetur adipisicing elit.Lorem ipsum dolor sit amet consectetur adipisicing elit.',
+      rating: 5
+    },
+    {
+      title: 'La Familia de Pascual Duarte',
+      author: 'Camilo Jose Cela',
+      coverUrl: 'https://www.portalsolidario.net/ocio/images/criticaliteraria/images/1040383401.jpg',
+      review: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Nobis autem quis doloremque nesciunt dolores ad incidunt ipsam consequuntur vero numquam perferendis libero assumenda ut mollitia repellendus sit eos, repellat atque.Lorem ipsum dolor sit amet consectetur adipisicing elit.',
+      rating: 4
+    }
+  ]
   },
   getters: {
-    isAuthenticated: state => state.user !== null && state.user !== undefined 
+    isAuthenticated: state => state.user !== null && state.user !== undefined,
+    loadedReviews (state) {
+      return state.loadedReviews.sort((reviewA, reviewB) => {
+        return reviewA.title > reviewB.title
+      })
+    }
   },
   mutations: {
     setUser (state, payload) {
@@ -22,6 +43,9 @@ export const store = new Vuex.Store({
     },
     setError (state, payload) {
       state.error = payload
+    },
+    newReview (state, payload) {
+      state.loadedReviews.push(payload)
     }
   },
   actions: {
@@ -55,6 +79,24 @@ export const store = new Vuex.Store({
       firebase.auth().signOut()      
       commit('setUser', null)
       router.push('/')
+    },
+    newReview({commit}, payload) {
+      const review = {
+        title: payload.title,
+        author: payload.author,
+        coverUrl: payload.coverUrl,
+        review: payload.review,
+        rating: payload.rating
+      }
+      firebase.database().ref('reviews').push(review)
+      .then((data) => {
+        const key = data.key
+        commit('newReview', {
+          ...review,
+          id: key
+        })
+      })
+      .catch((err) => console.log(err))
     }
   }
 });

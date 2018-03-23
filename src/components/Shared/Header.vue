@@ -36,11 +36,11 @@ export default {
       if (this.isAuthenticated) {
         return [
           {title: 'Reviews', path: '/reviews', icon: 'fas fa-book'},
+          {title: 'New', path: '/review/new', icon: 'fas fa-edit'},
           {title: 'Profile', path: '/profile', icon: 'fas fa-user-circle'},
         ]
       } else {
-        return [
-          // {title: 'About', path: '/about'},          
+        return [       
           {title: 'Register', path: '/register', icon: 'fas fa-user-plus'},
           {title: 'Login', path: '/login', icon: 'fas fa-sign-in-alt'},
         ]

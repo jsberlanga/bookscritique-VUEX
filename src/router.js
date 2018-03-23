@@ -8,6 +8,8 @@ import Login from "./components/User/Login.vue";
 import Register from "./components/User/Register.vue";
 
 import Reviews from "./components/Reviews/Reviews.vue";
+import NewReview from './components/Reviews/NewReview.vue'
+import Review from './components/Reviews/Review.vue'
 import Profile from "./components/User/Profile.vue";
 
 import firebase from "firebase";
@@ -45,6 +47,23 @@ const router = new Router({
       path: "/reviews",
       name: "reviews",
       component: Reviews,
+      meta: {
+        requiresAuth: true
+      }
+    },
+    {
+      path: "/reviews/:id/",
+      name: "review",
+      props:true,
+      component: Review,
+      meta: {
+        requiresAuth: true
+      }
+    },
+    {
+      path: "/review/new/",
+      name: "newreview",
+      component: NewReview,
       meta: {
         requiresAuth: true
       }
